@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Image Captioning & Segmentation</title>
+
+    <!-- Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .card {
+            border-radius: 15px;
+        }
+        .caption-box {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        .form-control {
+            padding: 14px;
+            font-size: 1.1rem;
+        }
+        .btn-success {
+            font-size: 1.2rem;
+            padding: 12px 28px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4"><i class="bi bi-stars"></i> Smart Image Analyzer</h2>
+
+        <!-- Upload Form -->
+        <form method="POST" action="/" enctype="multipart/form-data" id="upload-form">
+            <div class="mb-3 text-center">
+                <input class="form-control" type="file" name="image" id="imageInput" required>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-success px-4" type="submit">
+                    <i class="bi bi-upload"></i> Upload & Analyze
+                </button>
+            </div>
+        </form>
+
+        <!-- Loading Spinner -->
+        <div class="text-center mt-4" id="loading" style="display: none;">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2">Processing image...</p>
+        </div>
+
+        {% if caption %}
+        <!-- Results -->
+        <div class="mt-5 row">
+            <div class="col-md-6 text-center">
+                <h5>🖼️ Original Image</h5>
+                <img src="{{ original_path }}" class="img-fluid rounded shadow mb-2">
+                <div class="caption-box"><strong>📝 Caption:</strong> {{ caption }}</div>
+            </div>
+            <div class="col-md-6 text-center">
+                <h5>🎯 Segmented Output</h5>
+                <img src="{{ segmented_path }}" class="img-fluid rounded shadow">
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('upload-form');
+    form.addEventListener('submit', () => {
+        document.getElementById('loading').style.display = 'block';
+    });
+</script>
+
+</body>
+</html>

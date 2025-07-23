@@ -1,0 +1,2 @@
+image1.jpg|a cat is sitting on the bed
+image2.jpg|a man is playing football
